@@ -47,20 +47,20 @@ let currentScene = "start";
 const scenes = {
 
   start: {
-    text: "Two journeys. One future.",
+    text: "choose your characted!",
     timeline: "",
     leftImage: "",
     rightImage: "",
     music: "sounds/opening.mp3",
     choices: [
-      { text: "Play as Saradha", next: "amma_intro", setPlayer: "amma" },
-      { text: "Play as Satish", next: "appa_intro", setPlayer: "appa" }
+      { text: "play as saradha", next: "amma_intro", setPlayer: "amma" },
+      { text: "play as satish", next: "appa_intro", setPlayer: "appa" }
     ]
   },
 
   amma_intro: {
-    text: "Tamil Nadu, 1998. Suitcases packed. No one asked if you were ready.",
-    timeline: "Chennai, 1998",
+    text: "text",
+    timeline: "Chennai, year",
     leftImage: "images/amma.png",
     music: "sounds/india_theme.mp3",
     statChanges: { culture: 1, fear: 1 },
@@ -70,13 +70,13 @@ const scenes = {
   },
 
   appa_intro: {
-    text: "Tamil Nadu, 2001. A degree finished. The future uncertain.",
-    timeline: "Chennai, 2001",
+    text: "text",
+    timeline: "Chennai, year",
     leftImage: "images/appa.png",
     music: "sounds/india_theme.mp3",
     statChanges: { ambition: 1, risk: 1 },
     choices: [
-      { text: "Apply for Master's Abroad", next: "appa_arrival" }
+      { text: "uh", next: "appa_arrival" }
     ]
   }
 
