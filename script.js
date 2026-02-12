@@ -47,7 +47,7 @@ let currentScene = "start";
 const scenes = {
 
   start: {
-    text: "choose your characted!",
+    text: "choose your character!",
     timeline: "",
     leftImage: "",
     rightImage: "",
@@ -65,7 +65,7 @@ const scenes = {
     music: "sounds/india_theme.mp3",
     statChanges: { culture: 1, fear: 1 },
     choices: [
-      { text: "Continue", next: "amma_arrival" }
+      { text: "continue", next: "amma_arrival" }
     ]
   },
 
