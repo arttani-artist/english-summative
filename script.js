@@ -2,8 +2,8 @@
 
 let currentPlayer = null;
 
-let momStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
-let dadStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
+let ammaStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
+let appaStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
 
 //music
 
@@ -20,7 +20,7 @@ function playMusic(src) {
 //thing
 
 function updateIdentityBar() {
-  let stats = currentPlayer === "mom" ? momStats : dadStats;
+  let stats = currentPlayer === "amma" ? ammaStats : appaStats;
   let diff = stats.culture - stats.assimilation;
 
   let width = 50 + diff * 5;
@@ -37,7 +37,7 @@ function updateIdentityBar() {
 //uh conditional dynamic text thingy
 
 function getDynamicText(baseText, player) {
-  let stats = player === "mom" ? momStats : dadStats;
+  let stats = player === "amma" ? ammaStats : appaStats;
 
   if (stats.fear > 3) {
     return baseText + "\n\nYou almost turned back more than once.";
@@ -61,111 +61,111 @@ const scenes = {
     timeline: "",
     music: "sounds/opening.mp3",
     choices: [
-      { text: "Play as Saradha", next: "mom_intro", setPlayer: "mom" },
-      { text: "Play as Satish", next: "dad_intro", setPlayer: "dad" }
+      { text: "Play as Saradha", next: "amma_intro", setPlayer: "amma" },
+      { text: "Play as Satish", next: "appa_intro", setPlayer: "appa" }
     ]
   },
 
   //amma
 
-  mom_intro: {
+  amma_intro: {
     text: "Tamil Nadu, late 1990s. Childhood felt contained.",
     timeline: "Chennai",
     statChanges: { culture: 1 },
     music: "sounds/india.mp3",
-    choices: [{ text: "Continue", next: "mom_expectations" }]
+    choices: [{ text: "Continue", next: "amma_expectations" }]
   },
 
-  mom_expectations: {
+  amma_expectations: {
     text: "There were expectations. Quiet ones. Firm ones.",
     statChanges: { fear: 1 },
     choices: [
-      { text: "Accept them", next: "mom_departure", statChanges: { culture: 1 } },
-      { text: "Question them silently", next: "mom_departure", statChanges: { ambition: 1 } }
+      { text: "Accept them", next: "amma_departure", statChanges: { culture: 1 } },
+      { text: "Question them silently", next: "amma_departure", statChanges: { ambition: 1 } }
     ]
   },
 
-  mom_departure: {
+  amma_departure: {
     text: "The move was decided. Not by you.",
     timeline: "Departure",
     statChanges: { fear: 1 },
-    choices: [{ text: "Continue", next: "mom_arrival" }]
+    choices: [{ text: "Continue", next: "amma_arrival" }]
   },
 
-  mom_arrival: {
+  amma_arrival: {
     text: "America felt loud. Fast. Different.",
     timeline: "United States",
     statChanges: { assimilation: 1 },
     music: "sounds/arrival.mp3",
-    choices: [{ text: "Continue", next: "mom_identity_split" }]
+    choices: [{ text: "Continue", next: "amma_identity_split" }]
   },
 
-  mom_identity_split: {
+  amma_identity_split: {
     text: "At school, your name sounded unfamiliar.",
     choices: [
-      { text: "Blend in", next: "mom_choice_branch", statChanges: { assimilation: 2 } },
-      { text: "Hold onto home", next: "mom_choice_branch", statChanges: { culture: 2 } }
+      { text: "Blend in", next: "amma_choice_branch", statChanges: { assimilation: 2 } },
+      { text: "Hold onto home", next: "amma_choice_branch", statChanges: { culture: 2 } }
     ]
   },
 
-  mom_choice_branch: {
+  amma_choice_branch: {
     text: "Identity became something you negotiated daily.",
-    choices: [{ text: "Continue", next: "mom_pre_meeting" }]
+    choices: [{ text: "Continue", next: "amma_pre_meeting" }]
   },
 
-  mom_pre_meeting: {
+  amma_pre_meeting: {
     text: "Years later, you were steadier. Different, but whole.",
     choices: [{ text: "Continue", next: "meeting_scene" }]
   },
 
   //appa
 
-  dad_intro: {
+  appa_intro: {
     text: "Tamil Nadu, early 2000s. A degree finished.",
     timeline: "Chennai",
     statChanges: { ambition: 1 },
     music: "sounds/india.mp3",
-    choices: [{ text: "Continue", next: "dad_undergrad_pressure" }]
+    choices: [{ text: "Continue", next: "appa_undergrad_pressure" }]
   },
 
-  dad_undergrad_pressure: {
+  appa_undergrad_pressure: {
     text: "The future demanded something certain.",
     choices: [
-      { text: "Stay safe", next: "dad_decision_to_leave", statChanges: { fear: 1 } },
-      { text: "Take the risk", next: "dad_decision_to_leave", statChanges: { risk: 2 } }
+      { text: "Stay safe", next: "appa_decision_to_leave", statChanges: { fear: 1 } },
+      { text: "Take the risk", next: "appa_decision_to_leave", statChanges: { risk: 2 } }
     ]
   },
 
-  dad_decision_to_leave: {
+  appa_decision_to_leave: {
     text: "You chose to apply abroad.",
     statChanges: { ambition: 1 },
-    choices: [{ text: "Continue", next: "dad_arrival" }]
+    choices: [{ text: "Continue", next: "appa_arrival" }]
   },
 
-  dad_arrival: {
+  appa_arrival: {
     text: "The U.S. was opportunity and uncertainty combined.",
     timeline: "United States",
     statChanges: { assimilation: 1 },
     music: "sounds/arrival.mp3",
-    choices: [{ text: "Continue", next: "dad_world_event" }]
+    choices: [{ text: "Continue", next: "appa_world_event" }]
   },
 
-  dad_world_event: {
+  appa_world_event: {
     text: "Global events reshaped the atmosphere overnight.",
     timeline: "Post-9/11 Era",
     statChanges: { fear: 1 },
-    choices: [{ text: "Continue", next: "dad_risk_choice" }]
+    choices: [{ text: "Continue", next: "appa_risk_choice" }]
   },
 
-  dad_risk_choice: {
+  appa_risk_choice: {
     text: "You could push forward or retreat.",
     choices: [
-      { text: "Push forward", next: "dad_pre_meeting", statChanges: { ambition: 2 } },
-      { text: "Play it safe", next: "dad_pre_meeting", statChanges: { fear: 1 } }
+      { text: "Push forward", next: "appa_pre_meeting", statChanges: { ambition: 2 } },
+      { text: "Play it safe", next: "appa_pre_meeting", statChanges: { fear: 1 } }
     ]
   },
 
-  dad_pre_meeting: {
+  appa_pre_meeting: {
     text: "You had built something from uncertainty.",
     choices: [{ text: "Continue", next: "meeting_scene" }]
   },
@@ -210,7 +210,7 @@ function loadScene(sceneName) {
     document.getElementById("story-text").innerText = text;
 
     if (scene.statChanges) {
-      let stats = currentPlayer === "mom" ? momStats : dadStats;
+      let stats = currentPlayer === "amma" ? ammaStats : appaStats;
       for (let key in scene.statChanges) {
         stats[key] += scene.statChanges[key];
       }
@@ -228,7 +228,7 @@ function loadScene(sceneName) {
         if (choice.setPlayer) currentPlayer = choice.setPlayer;
 
         if (choice.statChanges) {
-          let stats = currentPlayer === "mom" ? momStats : dadStats;
+          let stats = currentPlayer === "amma" ? ammaStats : appaStats;
           for (let key in choice.statChanges) {
             stats[key] += choice.statChanges[key];
           }
@@ -250,11 +250,11 @@ function loadScene(sceneName) {
 function generateMeetingText() {
 
   let combined = {
-    ambition: momStats.ambition + dadStats.ambition,
-    culture: momStats.culture + dadStats.culture,
-    assimilation: momStats.assimilation + dadStats.assimilation,
-    fear: momStats.fear + dadStats.fear,
-    risk: momStats.risk + dadStats.risk
+    ambition: ammaStats.ambition + appaStats.ambition,
+    culture: ammaStats.culture + appaStats.culture,
+    assimilation: ammaStats.assimilation + appaStats.assimilation,
+    fear: ammaStats.fear + appaStats.fear,
+    risk: ammaStats.risk + appaStats.risk
   };
 
   let text = "All the choices. All the uncertainty.";
