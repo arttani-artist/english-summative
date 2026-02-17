@@ -275,7 +275,10 @@ document.getElementById("right-image").src = scene.rightImage || "";
       : scene.text || "";
 
     if (scene.dynamic && sceneName === "meeting_scene") {
-      text = generateMeetingText();
+      text = generateMeetingText(
+        document.getElementById("identity-bar").style.background =
+          "linear-gradient(to right, maroon, navy)";
+      );
     }
 
     if (!scene.dynamic) {
