@@ -129,11 +129,14 @@ const scenes = {
   },
 
   amma_departure: {
-    text: "The move was decided. Not by you.",
-    timeline: "Departure",
-    statChanges: { fear: 1 },
-    choices: [{ text: "Continue", next: "amma_arrival" }]
-  },
+    text: function() {
+      return "...\n\n\"" + quotes.amma.departure + "\"";
+    },
+  timeline: "departure",
+  statChanges: { fear: 1 },
+  choices: [{ text: "continue", next: "amma_arrival" }]
+},
+
 
   amma_hidden_memory: {
   requirement: function() {
