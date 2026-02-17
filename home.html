@@ -1,38 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>netra's english summative</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="overlay"></div>
+<div id="scene-background"></div>
 
-<div id="timeline"></div>
+<div id="ui">
 
-<div id="identity-container">
-  <div id="identity-bar"></div>
-</div>
-
-<div id="game">
-
-  <h1 id="title">netra's english summative</h1>
-
-  <div id="image-container">
-    <img id="left-image" src="" alt="">
-    <img id="right-image" src="" alt="">
+  <div id="top-bar">
+    <div id="identity-meter">
+      <div id="identity-fill"></div>
+    </div>
+    <div id="timeline"></div>
   </div>
 
-  <div id="text-box">
-    <p id="story-text"></p>
+  <div id="game">
+    <div id="character-layer">
+      <img id="left-image">
+      <img id="right-image">
+    </div>
+
+    <div id="text-box"></div>
+    <div id="choices"></div>
   </div>
 
-  <div id="choices"></div>
-
 </div>
+
+<audio id="click-sound" src="sounds/click.mp3"></audio>
 
 <script src="script.js"></script>
 </body>
 </html>
-
