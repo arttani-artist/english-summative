@@ -237,6 +237,26 @@ const scenes = {
   choices: [{ text: "restart", next: "start" }]
 },
 
+let typeSound = new Audio("sounds/typeclick.mp3");
+typeSound.volume = 0.15;
+
+function typeWriter(text, i = 0) {
+  let element = document.getElementById("story-text");
+  element.innerText = "";
+  
+  if (window.typewriterInterval) clearInterval(window.typewriterInterval);
+
+  window.typewriterInterval = setInterval(() => {
+    if (i < text.length) {
+      element.innerText += text[i];
+      typeSound.currentTime = 0;
+      typeSound.play();
+      i++;
+    } else {
+      clearInterval(window.typewriterInterval);
+    }
+  }, 25);
+}
 
 };
 
@@ -285,7 +305,7 @@ document.getElementById("right-image").src = scene.rightImage || "";
       text = getDynamicText(text, currentPlayer);
     }
 
-    document.getElementById("story-text").innerText = text;
+  typeWriter(text);
 
     if (scene.statChanges) {
       let stats = currentPlayer === "amma" ? ammaStats : appaStats;
