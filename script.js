@@ -335,7 +335,7 @@ function generateMeetingText() {
     risk: ammaStats.risk + appaStats.risk
   };
 
-  let text = "All the choices. All the uncertainty.";
+  let text = "...";
 
   if (combined.ambition > combined.fear) {
     text += "...";
