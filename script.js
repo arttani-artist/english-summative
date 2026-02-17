@@ -5,17 +5,46 @@ let currentPlayer = null;
 let ammaStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
 let appaStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
 
-//music
+// music
 
 let currentMusic = null;
 
-function playMusic(src) {
-  if (currentMusic) currentMusic.pause();
-  currentMusic = new Audio(src);
-  currentMusic.loop = true;
-  currentMusic.volume = 0.3;
-  currentMusic.play();
+function fadeOut(audio, duration = 800) {
+  if (!audio) return;
+
+  let step = audio.volume / (duration / 50);
+  let fade = setInterval(() => {
+    if (audio.volume - step > 0) {
+      audio.volume -= step;
+    } else {
+      audio.volume = 0;
+      audio.pause();
+      clearInterval(fade);
+    }
+  }, 50);
 }
+
+function playMusic(src) {
+  if (currentMusic && currentMusic.src.includes(src)) return;
+
+  fadeOut(currentMusic);
+
+  let newMusic = new Audio(src);
+  newMusic.loop = true;
+  newMusic.volume = 0;
+  newMusic.play();
+
+  let fade = setInterval(() => {
+    if (newMusic.volume < 0.3) {
+      newMusic.volume += 0.02;
+    } else {
+      clearInterval(fade);
+    }
+  }, 50);
+
+  currentMusic = newMusic;
+}
+
 
 //thing
 
