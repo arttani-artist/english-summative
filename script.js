@@ -100,7 +100,7 @@ let currentScene = "start";
 const scenes = {
 
   start: {
-    text: "Two journeys. One future.",
+    text: "....",
     timeline: "",
     music: "sounds/opening.mp3",
     choices: [
@@ -112,7 +112,7 @@ const scenes = {
   //amma
 
   amma_intro: {
-    text: "Tamil Nadu, late 1990s. Childhood felt contained.",
+    text: "Tamil Nadu, late 1990s.",
     timeline: "Chennai",
     statChanges: { culture: 1 },
     music: "sounds/india.mp3",
@@ -120,11 +120,11 @@ const scenes = {
   },
 
   amma_expectations: {
-    text: "There were expectations. Quiet ones. Firm ones.",
+    text: "...",
     statChanges: { fear: 1 },
     choices: [
-      { text: "Accept them", next: "amma_departure", statChanges: { culture: 1 } },
-      { text: "Question them silently", next: "amma_departure", statChanges: { ambition: 1 } }
+      { text: "..", next: "amma_departure", statChanges: { culture: 1 } },
+      { text: "..", next: "amma_departure", statChanges: { ambition: 1 } }
     ]
   },
 
@@ -143,12 +143,12 @@ const scenes = {
     return ammaStats.culture > 3
   },
   fallback: "amma_pre_meeting",
-  text: "a memory you never let go of.",
+  text: "...",
   choices: [{ text: "continue", next: "amma_pre_meeting" }]
 },
     
   amma_arrival: {
-    text: "America felt loud. Fast. Different.",
+    text: "...",
     timeline: "United States",
     statChanges: { assimilation: 1 },
     music: "sounds/arrival.mp3",
@@ -156,7 +156,7 @@ const scenes = {
   },
 
   amma_identity_split: {
-    text: "At school, your name sounded unfamiliar.",
+    text: "...",
     choices: [
       { text: "Blend in", next: "amma_choice_branch", statChanges: { assimilation: 2 } },
       { text: "Hold onto home", next: "amma_choice_branch", statChanges: { culture: 2 } }
@@ -164,19 +164,19 @@ const scenes = {
   },
 
   amma_choice_branch: {
-    text: "Identity became something you negotiated daily.",
+    text: "...",
     choices: [{ text: "Continue", next: "amma_pre_meeting" }]
   },
 
   amma_pre_meeting: {
-    text: "Years later, you were steadier. Different, but whole.",
+    text: "...",
     choices: [{ text: "Continue", next: "meeting_scene" }]
   },
 
   //appa
 
   appa_intro: {
-    text: "Tamil Nadu, early 2000s. A degree finished.",
+    text: "...",
     timeline: "Chennai",
     statChanges: { ambition: 1 },
     music: "sounds/india.mp3",
@@ -184,21 +184,21 @@ const scenes = {
   },
 
   appa_undergrad_pressure: {
-    text: "The future demanded something certain.",
+    text: "...",
     choices: [
-      { text: "Stay safe", next: "appa_decision_to_leave", statChanges: { fear: 1 } },
-      { text: "Take the risk", next: "appa_decision_to_leave", statChanges: { risk: 2 } }
+      { text: "..", next: "appa_decision_to_leave", statChanges: { fear: 1 } },
+      { text: "..", next: "appa_decision_to_leave", statChanges: { risk: 2 } }
     ]
   },
 
   appa_decision_to_leave: {
-    text: "You chose to apply abroad.",
+    text: "...",
     statChanges: { ambition: 1 },
     choices: [{ text: "Continue", next: "appa_arrival" }]
   },
 
   appa_arrival: {
-    text: "The U.S. was opportunity and uncertainty combined.",
+    text: "...",
     timeline: "United States",
     statChanges: { assimilation: 1 },
     music: "sounds/arrival.mp3",
@@ -206,33 +206,37 @@ const scenes = {
   },
 
   appa_world_event: {
-    text: "Global events reshaped the atmosphere overnight.",
+    text: "...",
     timeline: "Post-9/11 Era",
     statChanges: { fear: 1 },
     choices: [{ text: "Continue", next: "appa_risk_choice" }]
   },
 
   appa_risk_choice: {
-    text: "You could push forward or retreat.",
+    text: "...",
     choices: [
-      { text: "Push forward", next: "appa_pre_meeting", statChanges: { ambition: 2 } },
-      { text: "Play it safe", next: "appa_pre_meeting", statChanges: { fear: 1 } }
+      { text: "..", next: "appa_pre_meeting", statChanges: { ambition: 2 } },
+      { text: "..", next: "appa_pre_meeting", statChanges: { fear: 1 } }
     ]
   },
 
   appa_pre_meeting: {
-    text: "You had built something from uncertainty.",
+    text: "...",
     choices: [{ text: "Continue", next: "meeting_scene" }]
   },
 
   //meet
 
   meeting_scene: {
-    dynamic: true,
-    timeline: "The Meeting",
-    music: "sounds/meeting.mp3",
-    choices: [{ text: "Restart", next: "start" }]
-  }
+  dynamic: true,
+  timeline: "the meeting",
+  music: "sounds/meeting.mp3",
+  leftImage: "images/amma_pixel.png",
+  rightImage: "images/appa_pixel.png",
+  background: "images/meeting_bg.png",
+  choices: [{ text: "restart", next: "start" }]
+},
+
 
 };
 
