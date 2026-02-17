@@ -79,6 +79,20 @@ function getDynamicText(baseText, player) {
   return baseText;
 }
 
+//quotes from interview (add more ltr)
+const quotes = {
+  amma: {
+    departure: "",
+    arrival: "",
+    identity: ""
+  },
+  appa: {
+    decision: "",
+    arrival: "",
+    uncertainty: ""
+  }
+};
+
 //scenes
 
 let currentScene = "start";
