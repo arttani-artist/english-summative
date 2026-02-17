@@ -69,11 +69,11 @@ function getDynamicText(baseText, player) {
   let stats = player === "amma" ? ammaStats : appaStats;
 
   if (stats.fear > 3) {
-    return baseText + "\n\nYou almost turned back more than once.";
+    return baseText + "...";
   }
 
   if (stats.ambition > 3) {
-    return baseText + "\n\nYou weren’t just leaving. You were building.";
+    return baseText + "...";
   }
 
   return baseText;
@@ -328,18 +328,18 @@ function generateMeetingText() {
   let text = "All the choices. All the uncertainty.";
 
   if (combined.ambition > combined.fear) {
-    text += "\n\nYou were builders.";
+    text += "...";
   }
 
   if (combined.culture > combined.assimilation) {
-    text += "\n\nYou carried home with you.";
+    text += "...";
   }
 
   if (combined.risk > 3) {
-    text += "\n\nIt began with a leap.";
+    text += "...";
   }
 
-  text += "\n\nAnd somehow, your paths crossed.";
+  text += "...";
 
   return text;
 }
