@@ -121,6 +121,15 @@ const scenes = {
     choices: [{ text: "Continue", next: "amma_arrival" }]
   },
 
+  amma_hidden_memory: {
+  requirement: function() {
+    return ammaStats.culture > 3
+  },
+  fallback: "amma_pre_meeting",
+  text: "a memory you never let go of.",
+  choices: [{ text: "continue", next: "amma_pre_meeting" }]
+},
+    
   amma_arrival: {
     text: "America felt loud. Fast. Different.",
     timeline: "United States",
@@ -220,13 +229,29 @@ function loadScene(sceneName) {
   setTimeout(() => {
 
     let scene = scenes[sceneName];
+    if (scene.requirement && !scene.requirement()) {
+      loadScene(scene.fallback || "start");
+      return;
+}
+
     currentScene = sceneName;
 
     if (scene.music) playMusic(scene.music);
 
     document.getElementById("timeline").innerText = scene.timeline || "";
+    
+    if (scene.background) {
+      document.getElementById("scene-background").style.backgroundImage =
+        `url(${scene.background})`;
+}
 
-    let text = scene.text || "";
+document.getElementById("left-image").src = scene.leftImage || "";
+document.getElementById("right-image").src = scene.rightImage || "";
+
+
+    let text = typeof scene.text === "function"
+      ? scene.text()
+      : scene.text || "";
 
     if (scene.dynamic && sceneName === "meeting_scene") {
       text = generateMeetingText();
