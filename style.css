@@ -41,12 +41,32 @@ body {
   transition: width 0.5s ease, background 0.5s ease;
 }
 
-#image-container {
+#scene-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  transition: background-image 1s ease;
+}
+
+#character-layer {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  align-items: flex-end;
+  gap: 40px;
+  height: 300px;
+  margin-top: 40px;
 }
+
+#left-image, #right-image {
+  image-rendering: pixelated;
+  height: 220px;
+}
+
 
 #left-image, #right-image {
   max-height: 250px;
