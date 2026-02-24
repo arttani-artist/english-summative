@@ -134,18 +134,18 @@ function generateMeetingText() {
   let text = "all the choices led here.";
 
   if (combined.ambition > combined.fear) {
-    text += "\n\nyou were builders.";
+    text += "\n\nyou built your place.";
   }
 
   if (combined.culture > combined.assimilation) {
-    text += "\n\nyou carried home with you.";
+    text += "\n\nyou carried a piece home with you.";
   }
 
   if (combined.risk > 3) {
-    text += "\n\nit began with a leap.";
+    text += "\n\nit began with faith in the risks.";
   }
 
-  text += "\n\nand somehow, your paths crossed.";
+  text += "\n\nand somehow, you came together.";
 
   return text;
 }
