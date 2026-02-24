@@ -157,7 +157,7 @@ const scenes = {
   start: {
     text: "two journeys. what will you choose?",
     music: "sounds/opening.mp3",
-    background: "images/airport.png",
+    background: "images/Airport.png",
     choices: [
       { text: "play as saradha", next: "amma_intro", setPlayer: "amma" },
       { text: "play as satish", next: "appa_intro", setPlayer: "appa" }
@@ -170,7 +170,7 @@ const scenes = {
     text: "tamil nadu, late 1990s. you are moving to america whether you like it or not.",
     timeline: "chennai",
     background: "images/IIT.png",
-    leftImage: "images/amma_neutral.png",
+    leftImage: "images/Amma_Neutral.png",
     statChanges: { culture: 1 },
     music: "sounds/india.mp3",
     choices: [
@@ -182,8 +182,8 @@ const scenes = {
   amma_departure: {
     text: "the airport felt bigger than your whole world.",
     timeline: "chennai airport",
-    background: "images/airport.png",
-    leftImage: "images/amma_sad.png",
+    background: "images/Airport.png",
+    leftImage: "images/Amma_Sad.png",
     statChanges: { fear: 1 },
     music: "sounds/airport.mp3",
     choices: [
@@ -195,8 +195,8 @@ const scenes = {
   amma_arrival: {
     text: "maryland felt loud and unfamiliar. but you have to adapt, right?",
     timeline: "maryland, united states",
-    background: "images/maryland.png",
-    leftImage: "images/amma_speaking.png",
+    background: "images/Maryland.png",
+    leftImage: "images/Amma_Speaking.png",
     statChanges: { assimilation: 1 },
     music: "sounds/airport.mp3",
     choices: [
@@ -207,8 +207,8 @@ const scenes = {
 
   amma_identity_split: {
     text: "your name sounded different here. it was hard to pronounce and you didnt feel like yourself when you heard your names on foreign tongues.",
-    background: "images/maryland.png",
-    leftImage: "images/amma_neutral.png",
+    background: "images/Maryland.png",
+    leftImage: "images/Amma_Neutral.png",
     choices: [
       { text: "shorten your name from 'Saradha' to 'Sara'", next: "amma_growth", statChanges: { assimilation: 1 } },
       { text: "correct people", next: "amma_growth", statChanges: { culture: 1 } }
@@ -217,7 +217,7 @@ const scenes = {
 
   amma_growth: {
     text: "slowly, you built confidence. this is where you were met to be",
-    leftImage: "images/amma_happy.png",
+    leftImage: "images/Amma_Happy.png",
     statChanges: { ambition: 1 },
     choices: [
       { text: "focus on academics", next: "amma_hidden_memory", statChanges: { ambition: 1 } },
@@ -231,15 +231,15 @@ const scenes = {
     },
     fallback: "amma_pre_meeting",
     text: "a memory of home stayed with you longer than you expected.",
-    background: "images/chennai.png",
-    leftImage: "images/amma_sad.png",
+    background: "images/Chennai.png",
+    leftImage: "images/Amma_Sad.png",
     statChanges: { culture: 1 },
     choices: [{ text: "move forward", next: "amma_pre_meeting" }]
   },
 
   amma_pre_meeting: {
     text: "you had grown into someone connected between your two worlds.",
-    leftImage: "images/amma_neutral.png",
+    leftImage: "images/Amma_Neutral.png",
     choices: [{ text: "continue", next: "meeting_scene" }]
   },
 
@@ -248,8 +248,8 @@ const scenes = {
   appa_intro: {
     text: "you finished your undergrad degree. america feels like the next step.",
     timeline: "chennai",
-    background: "images/chennai.png",
-    rightImage: "images/appa_neutral.png",
+    background: "images/Chennai.png",
+    rightImage: "images/Appa_Neutral.png",
     statChanges: { ambition: 1 },
     music: "sounds/india2.mp3",
     choices: [
@@ -261,8 +261,8 @@ const scenes = {
   appa_arrival: {
     text: "syracuse was cold and unfamiliar.",
     timeline: "syracuse, united states",
-    background: "images/syracuse.png",
-    rightImage: "images/appa_speaking.png",
+    background: "images/Syracuse.png",
+    rightImage: "images/Appa_Speaking.png",
     statChanges: { assimilation: 1 },
     music: "sounds/airport.mp3",
     choices: [
@@ -273,7 +273,7 @@ const scenes = {
 
   appa_pressure: {
     text: "research was isolating at times.",
-    rightImage: "images/appa_sad.png",
+    rightImage: "images/Appa_Sad.png",
     statChanges: { fear: 1 },
     choices: [
       { text: "push forward", next: "appa_growth", statChanges: { ambition: 1 } },
@@ -283,7 +283,7 @@ const scenes = {
 
   appa_growth: {
     text: "you became more certain in what you wanted to do, but would you continue to vie for your PhD or pursue a different path?",
-    rightImage: "images/appa_happy.png",
+    rightImage: "images/Appa_Happy.png",
     choices: [
       { text: "take a leap of faith", next: "appa_pre_meeting", statChanges: { risk: 2 } },
       { text: "play it safe", next: "appa_pre_meeting", statChanges: { fear: 1 } }
@@ -292,7 +292,7 @@ const scenes = {
 
   appa_pre_meeting: {
     text: "your path had shaped you into someone ready.",
-    rightImage: "images/appa_neutral.png",
+    rightImage: "images/Appa_Neutral.png",
     choices: [{ text: "continue", next: "meeting_scene" }]
   },
 
@@ -301,9 +301,9 @@ const scenes = {
   meeting_scene: {
     dynamic: true,
     timeline: "the meeting",
-    background: "images/maryland.png",
-    leftImage: "images/amma_happy.png",
-    rightImage: "images/appa_happy.png",
+    background: "images/Maryland.png",
+    leftImage: "images/Amma_Happy.png",
+    rightImage: "images/Appa_Happy.png",
     choices: [{ text: "restart", next: "start" }]
   }
 
