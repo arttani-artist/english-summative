@@ -62,10 +62,13 @@ body {
   margin-top: 40px;
 }
 
+
 #left-image,
 #right-image {
   image-rendering: pixelated;
   height: 220px;
+  display: none;
+  transition: opacity 0.5s ease;
 }
 
 #text-box {
