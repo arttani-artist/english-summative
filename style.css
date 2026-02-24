@@ -61,6 +61,22 @@ body {
   transition: width 0.5s ease, background 0.5s ease;
 }
 
+#identity-label-left,
+#identity-label-right {
+  position: absolute;
+  bottom: 2px;
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+#identity-label-left {
+  left: 10px;
+}
+
+#identity-label-right {
+  right: 10px;
+}
+
 #character-layer {
   display: flex;
   justify-content: center;
