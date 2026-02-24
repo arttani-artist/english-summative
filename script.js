@@ -388,3 +388,4 @@ const rightImg = document.getElementById("right-image");
 
 loadGame();
 loadScene(currentScene);
+updateIdentityBar();
