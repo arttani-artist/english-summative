@@ -329,9 +329,25 @@ function loadScene(sceneName) {
         `url(${scene.background})`;
     }
 
-    document.getElementById("left-image").src = scene.leftImage || "";
-    document.getElementById("right-image").src = scene.rightImage || "";
+   const leftImg = document.getElementById("left-image");
+const rightImg = document.getElementById("right-image");
 
+  if (scene.leftImage) {
+      leftImg.src = scene.leftImage;
+      leftImg.style.display = "block";
+} 
+  else {
+      leftImg.style.display = "none";
+}
+
+  if (scene.rightImage) {
+      rightImg.src = scene.rightImage;
+      rightImg.style.display = "block";
+} 
+  else {
+      rightImg.style.display = "none";
+}
+    
     let text = scene.dynamic ? generateMeetingText() : scene.text;
 
     typeWriter(text);
