@@ -1,377 +1,91 @@
-//stats
-
-let currentPlayer = null;
-
-let ammaStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
-let appaStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
-
-// music
-
-let currentMusic = null;
-
-function fadeOut(audio, duration = 800) {
-  if (!audio) return;
-
-  let step = audio.volume / (duration / 50);
-  let fade = setInterval(() => {
-    if (audio.volume - step > 0) {
-      audio.volume -= step;
-    } else {
-      audio.volume = 0;
-      audio.pause();
-      clearInterval(fade);
-    }
-  }, 50);
+body {
+  margin: 0;
+  background-color: #0e0e0e;
+  color: white;
+  font-family: "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
 }
 
-function playMusic(src) {
-  if (currentMusic && currentMusic.src.includes(src)) return;
-
-  fadeOut(currentMusic);
-
-  let newMusic = new Audio(src);
-  newMusic.loop = true;
-  newMusic.volume = 0;
-  newMusic.play();
-
-  let fade = setInterval(() => {
-    if (newMusic.volume < 0.3) {
-      newMusic.volume += 0.02;
-    } else {
-      clearInterval(fade);
-    }
-  }, 50);
-
-  currentMusic = newMusic;
+#scene-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  transition: background-image 1s ease;
 }
 
-
-//thing
-
-function updateIdentityBar() {
-  let stats = currentPlayer === "amma" ? ammaStats : appaStats;
-  let diff = stats.culture - stats.assimilation;
-
-  let width = 50 + diff * 5;
-  width = Math.max(15, Math.min(85, width));
-
-  let bar = document.getElementById("identity-bar");
-  bar.style.width = width + "%";
-
-  if (diff > 1) bar.style.background = "maroon";
-  else if (diff < -1) bar.style.background = "navy";
-  else bar.style.background = "purple";
+#game {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+  padding-top: 40px;
+  transition: opacity 0.8s ease;
 }
 
-//uh conditional dynamic text thingy
-
-function getDynamicText(baseText, player) {
-  let stats = player === "amma" ? ammaStats : appaStats;
-
-  if (stats.fear > 3) {
-    return baseText + "...";
-  }
-
-  if (stats.ambition > 3) {
-    return baseText + "...";
-  }
-
-  return baseText;
+.fade-out {
+  opacity: 0;
 }
 
-//quotes from interview (add more ltr)
-const quotes = {
-  amma: {
-    departure: "",
-    arrival: "",
-    identity: ""
-  },
-  appa: {
-    decision: "",
-    arrival: "",
-    uncertainty: ""
-  }
-};
-
-//scenes
-
-let currentScene = "start";
-
-const scenes = {
-
-  start: {
-    text: "....",
-    timeline: "",
-    music: "sounds/opening.mp3",
-    choices: [
-      { text: "Play as Saradha", next: "amma_intro", setPlayer: "amma" },
-      { text: "Play as Satish", next: "appa_intro", setPlayer: "appa" }
-    ]
-  },
-
-  //amma
-
-  amma_intro: {
-    text: "Tamil Nadu, late 1990s.",
-    timeline: "Chennai",
-    statChanges: { culture: 1 },
-    music: "sounds/india.mp3",
-    choices: [{ text: "Continue", next: "amma_expectations" }]
-  },
-
-  amma_expectations: {
-    text: "...",
-    statChanges: { fear: 1 },
-    choices: [
-      { text: "..", next: "amma_departure", statChanges: { culture: 1 } },
-      { text: "..", next: "amma_departure", statChanges: { ambition: 1 } }
-    ]
-  },
-
-  amma_departure: {
-    text: function() {
-      return "...\n\n\"" + quotes.amma.departure + "\"";
-    },
-  timeline: "departure",
-  statChanges: { fear: 1 },
-  choices: [{ text: "continue", next: "amma_arrival" }]
-},
-
-
-  amma_hidden_memory: {
-  requirement: function() {
-    return ammaStats.culture > 3
-  },
-  fallback: "amma_pre_meeting",
-  text: "...",
-  choices: [{ text: "continue", next: "amma_pre_meeting" }]
-},
-    
-  amma_arrival: {
-    text: "...",
-    timeline: "United States",
-    statChanges: { assimilation: 1 },
-    music: "sounds/arrival.mp3",
-    choices: [{ text: "Continue", next: "amma_identity_split" }]
-  },
-
-  amma_identity_split: {
-    text: "...",
-    choices: [
-      { text: "Blend in", next: "amma_choice_branch", statChanges: { assimilation: 2 } },
-      { text: "Hold onto home", next: "amma_choice_branch", statChanges: { culture: 2 } }
-    ]
-  },
-
-  amma_choice_branch: {
-    text: "...",
-    choices: [{ text: "Continue", next: "amma_pre_meeting" }]
-  },
-
-  amma_pre_meeting: {
-    text: "...",
-    choices: [{ text: "Continue", next: "meeting_scene" }]
-  },
-
-  //appa
-
-  appa_intro: {
-    text: "...",
-    timeline: "Chennai",
-    statChanges: { ambition: 1 },
-    music: "sounds/india.mp3",
-    choices: [{ text: "Continue", next: "appa_undergrad_pressure" }]
-  },
-
-  appa_undergrad_pressure: {
-    text: "...",
-    choices: [
-      { text: "..", next: "appa_decision_to_leave", statChanges: { fear: 1 } },
-      { text: "..", next: "appa_decision_to_leave", statChanges: { risk: 2 } }
-    ]
-  },
-
-  appa_decision_to_leave: {
-    text: "...",
-    statChanges: { ambition: 1 },
-    choices: [{ text: "Continue", next: "appa_arrival" }]
-  },
-
-  appa_arrival: {
-    text: "...",
-    timeline: "United States",
-    statChanges: { assimilation: 1 },
-    music: "sounds/arrival.mp3",
-    choices: [{ text: "Continue", next: "appa_world_event" }]
-  },
-
-  appa_world_event: {
-    text: "...",
-    timeline: "Post-9/11 Era",
-    statChanges: { fear: 1 },
-    choices: [{ text: "Continue", next: "appa_risk_choice" }]
-  },
-
-  appa_risk_choice: {
-    text: "...",
-    choices: [
-      { text: "..", next: "appa_pre_meeting", statChanges: { ambition: 2 } },
-      { text: "..", next: "appa_pre_meeting", statChanges: { fear: 1 } }
-    ]
-  },
-
-  appa_pre_meeting: {
-    text: "...",
-    choices: [{ text: "Continue", next: "meeting_scene" }]
-  },
-
-  //meet
-
-  meeting_scene: {
-  dynamic: true,
-  timeline: "the meeting",
-  music: "sounds/meeting.mp3",
-  leftImage: "images/amma_pixel.png",
-  rightImage: "images/appa_pixel.png",
-  background: "images/meeting_bg.png",
-  choices: [{ text: "restart", next: "start" }]
-},
-
-let typeSound = new Audio("sounds/typeclick.mp3");
-typeSound.volume = 0.15;
-
-function typeWriter(text, i = 0) {
-  let element = document.getElementById("story-text");
-  element.innerText = "";
-  
-  if (window.typewriterInterval) clearInterval(window.typewriterInterval);
-
-  window.typewriterInterval = setInterval(() => {
-    if (i < text.length) {
-      element.innerText += text[i];
-      typeSound.currentTime = 0;
-      typeSound.play();
-      i++;
-    } else {
-      clearInterval(window.typewriterInterval);
-    }
-  }, 25);
+#timeline {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 14px;
+  opacity: 0.7;
 }
 
-};
-
-//scene
-
-function loadScene(sceneName) {
-
-  const game = document.getElementById("game");
-  game.classList.add("fade-out");
-
-  setTimeout(() => {
-
-    let scene = scenes[sceneName];
-    if (scene.requirement && !scene.requirement()) {
-      loadScene(scene.fallback || "start");
-      return;
+#identity-meter {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 6px;
+  background-color: #222;
 }
 
-    currentScene = sceneName;
-
-    if (scene.music) playMusic(scene.music);
-
-    document.getElementById("timeline").innerText = scene.timeline || "";
-    
-    if (scene.background) {
-      document.getElementById("scene-background").style.backgroundImage =
-        `url(${scene.background})`;
+#identity-fill {
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(to right, maroon, navy);
+  transition: width 0.5s ease, background 0.5s ease;
 }
 
-document.getElementById("left-image").src = scene.leftImage || "";
-document.getElementById("right-image").src = scene.rightImage || "";
-
-
-    let text = typeof scene.text === "function"
-      ? scene.text()
-      : scene.text || "";
-
-    if (scene.dynamic && sceneName === "meeting_scene") {
-      text = generateMeetingText(
-        document.getElementById("identity-bar").style.background =
-          "linear-gradient(to right, maroon, navy)";
-      );
-    }
-
-    if (!scene.dynamic) {
-      text = getDynamicText(text, currentPlayer);
-    }
-
-  typeWriter(text);
-
-    if (scene.statChanges) {
-      let stats = currentPlayer === "amma" ? ammaStats : appaStats;
-      for (let key in scene.statChanges) {
-        stats[key] += scene.statChanges[key];
-      }
-      updateIdentityBar();
-    }
-
-    let choicesDiv = document.getElementById("choices");
-    choicesDiv.innerHTML = "";
-
-    scene.choices.forEach(choice => {
-      let button = document.createElement("button");
-      button.innerText = choice.text;
-
-      button.onclick = () => {
-        if (choice.setPlayer) currentPlayer = choice.setPlayer;
-
-        if (choice.statChanges) {
-          let stats = currentPlayer === "amma" ? ammaStats : appaStats;
-          for (let key in choice.statChanges) {
-            stats[key] += choice.statChanges[key];
-          }
-          updateIdentityBar();
-        }
-
-        loadScene(choice.next);
-      };
-
-      choicesDiv.appendChild(button);
-    });
-
-    game.classList.remove("fade-out");
-
-  }, 800);
+#character-layer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 40px;
+  height: 300px;
+  margin-top: 40px;
 }
 
-//end
-function generateMeetingText() {
-
-  let combined = {
-    ambition: ammaStats.ambition + appaStats.ambition,
-    culture: ammaStats.culture + appaStats.culture,
-    assimilation: ammaStats.assimilation + appaStats.assimilation,
-    fear: ammaStats.fear + appaStats.fear,
-    risk: ammaStats.risk + appaStats.risk
-  };
-
-  let text = "...";
-
-  if (combined.ambition > combined.fear) {
-    text += "...";
-  }
-
-  if (combined.culture > combined.assimilation) {
-    text += "...";
-  }
-
-  if (combined.risk > 3) {
-    text += "...";
-  }
-
-  text += "...";
-
-  return text;
+#left-image,
+#right-image {
+  image-rendering: pixelated;
+  height: 220px;
 }
 
-loadScene(currentScene);
+#text-box {
+  margin-top: 20px;
+  min-height: 120px;
+  font-size: 18px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+button {
+  background-color: #222;
+  color: white;
+  border: 1px solid #555;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #444;
+}
