@@ -167,7 +167,7 @@ const scenes = {
   amma_intro: {
     text: "tamil nadu, late 1990s.",
     timeline: "chennai",
-    background: "images/chennai_amma.png",
+    background: "images/IIT.png",
     leftImage: "images/amma_neutral.png",
     statChanges: { culture: 1 },
     music: "sounds/india.mp3",
@@ -177,7 +177,7 @@ const scenes = {
   amma_arrival: {
     text: "america felt loud.",
     timeline: "united states",
-    background: "images/syracuse.png",
+    background: "images/maryland.png",
     leftImage: "images/amma_speaking.png",
     statChanges: { assimilation: 1 },
     music: "sounds/arrival.mp3",
@@ -187,7 +187,7 @@ const scenes = {
   appa_intro: {
     text: "a degree finished.",
     timeline: "chennai",
-    background: "images/chennai_appa.png",
+    background: "images/chennai.png",
     rightImage: "images/appa_neutral.png",
     statChanges: { ambition: 1 },
     music: "sounds/india.mp3",
