@@ -185,6 +185,7 @@ const scenes = {
     background: "images/airport.png",
     leftImage: "images/amma_sad.png",
     statChanges: { fear: 1 },
+    music: "sounds/airport.mp3",
     choices: [
       { text: "hold onto home", next: "amma_arrival", statChanges: { culture: 1 } },
       { text: "prepare for change", next: "amma_arrival", statChanges: { assimilation: 1 } }
@@ -197,7 +198,7 @@ const scenes = {
     background: "images/maryland.png",
     leftImage: "images/amma_speaking.png",
     statChanges: { assimilation: 1 },
-    music: "sounds/arrival.mp3",
+    music: "sounds/airport.mp3",
     choices: [
       { text: "blend in at school", next: "amma_identity_split", statChanges: { assimilation: 2 } },
       { text: "keep your traditions", next: "amma_identity_split", statChanges: { culture: 2 } }
@@ -250,7 +251,7 @@ const scenes = {
     background: "images/chennai.png",
     rightImage: "images/appa_neutral.png",
     statChanges: { ambition: 1 },
-    music: "sounds/india.mp3",
+    music: "sounds/india2.mp3",
     choices: [
       { text: "apply for phd programs", next: "appa_arrival", statChanges: { ambition: 1 } },
       { text: "consider industry work", next: "appa_arrival", statChanges: { risk: 1 } }
@@ -263,7 +264,7 @@ const scenes = {
     background: "images/syracuse.png",
     rightImage: "images/appa_speaking.png",
     statChanges: { assimilation: 1 },
-    music: "sounds/arrival.mp3",
+    music: "sounds/airport.mp3",
     choices: [
       { text: "commit to phd", next: "appa_pressure", statChanges: { ambition: 2 } },
       { text: "reconsider your path", next: "appa_pressure", statChanges: { fear: 1 } }
@@ -303,7 +304,6 @@ const scenes = {
     background: "images/maryland.png",
     leftImage: "images/amma_happy.png",
     rightImage: "images/appa_happy.png",
-    music: "sounds/meeting.mp3",
     choices: [{ text: "restart", next: "start" }]
   }
 
