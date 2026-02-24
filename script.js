@@ -150,12 +150,12 @@ function generateMeetingText() {
   return text;
 }
 
-// scenes
+//scenes
 
 const scenes = {
 
   start: {
-    text: "two journeys. one future.",
+    text: "two journeys. what will you choose?",
     music: "sounds/opening.mp3",
     background: "images/airport.png",
     choices: [
@@ -164,45 +164,138 @@ const scenes = {
     ]
   },
 
+  // amma path
+
   amma_intro: {
-    text: "tamil nadu, late 1990s.",
+    text: "tamil nadu, late 1990s. you are moving to america whether you like it or not.",
     timeline: "chennai",
     background: "images/IIT.png",
     leftImage: "images/amma_neutral.png",
     statChanges: { culture: 1 },
     music: "sounds/india.mp3",
-    choices: [{ text: "continue", next: "amma_arrival" }]
+    choices: [
+      { text: "accept it quietly", next: "amma_departure", statChanges: { fear: 1 } },
+      { text: "argue about it", next: "amma_departure", statChanges: { ambition: 1 } }
+    ]
+  },
+
+  amma_departure: {
+    text: "the airport felt bigger than your whole world.",
+    timeline: "chennai airport",
+    background: "images/airport.png",
+    leftImage: "images/amma_sad.png",
+    statChanges: { fear: 1 },
+    choices: [
+      { text: "hold onto home", next: "amma_arrival", statChanges: { culture: 1 } },
+      { text: "prepare for change", next: "amma_arrival", statChanges: { assimilation: 1 } }
+    ]
   },
 
   amma_arrival: {
-    text: "america felt loud.",
-    timeline: "united states",
+    text: "maryland felt loud and unfamiliar. but you have to adapt, right?",
+    timeline: "maryland, united states",
     background: "images/maryland.png",
     leftImage: "images/amma_speaking.png",
     statChanges: { assimilation: 1 },
     music: "sounds/arrival.mp3",
+    choices: [
+      { text: "blend in at school", next: "amma_identity_split", statChanges: { assimilation: 2 } },
+      { text: "keep your traditions", next: "amma_identity_split", statChanges: { culture: 2 } }
+    ]
+  },
+
+  amma_identity_split: {
+    text: "your name sounded different here. it was hard to pronounce and you didnt feel like yourself when you heard your names on foreign tongues.",
+    background: "images/maryland.png",
+    leftImage: "images/amma_neutral.png",
+    choices: [
+      { text: "shorten your name from 'Saradha' to 'Sara'", next: "amma_growth", statChanges: { assimilation: 1 } },
+      { text: "correct people", next: "amma_growth", statChanges: { culture: 1 } }
+    ]
+  },
+
+  amma_growth: {
+    text: "slowly, you built confidence. this is where you were met to be",
+    leftImage: "images/amma_happy.png",
+    statChanges: { ambition: 1 },
+    choices: [
+      { text: "focus on academics", next: "amma_hidden_memory", statChanges: { ambition: 1 } },
+      { text: "focus on community", next: "amma_hidden_memory", statChanges: { culture: 1 } }
+    ]
+  },
+
+  amma_hidden_memory: {
+    requirement: function() {
+      return ammaStats.culture >= 3;
+    },
+    fallback: "amma_pre_meeting",
+    text: "a memory of home stayed with you longer than you expected.",
+    background: "images/chennai.png",
+    leftImage: "images/amma_sad.png",
+    statChanges: { culture: 1 },
+    choices: [{ text: "move forward", next: "amma_pre_meeting" }]
+  },
+
+  amma_pre_meeting: {
+    text: "you had grown into someone connected between your two worlds.",
+    leftImage: "images/amma_neutral.png",
     choices: [{ text: "continue", next: "meeting_scene" }]
   },
 
+  // appa path
+
   appa_intro: {
-    text: "a degree finished.",
+    text: "you finished your undergrad degree. america feels like the next step.",
     timeline: "chennai",
     background: "images/chennai.png",
     rightImage: "images/appa_neutral.png",
     statChanges: { ambition: 1 },
     music: "sounds/india.mp3",
-    choices: [{ text: "continue", next: "appa_arrival" }]
+    choices: [
+      { text: "apply for phd programs", next: "appa_arrival", statChanges: { ambition: 1 } },
+      { text: "consider industry work", next: "appa_arrival", statChanges: { risk: 1 } }
+    ]
   },
 
   appa_arrival: {
-    text: "uncertainty and opportunity.",
-    timeline: "united states",
+    text: "syracuse was cold and unfamiliar.",
+    timeline: "syracuse, united states",
     background: "images/syracuse.png",
     rightImage: "images/appa_speaking.png",
     statChanges: { assimilation: 1 },
     music: "sounds/arrival.mp3",
+    choices: [
+      { text: "commit to phd", next: "appa_pressure", statChanges: { ambition: 2 } },
+      { text: "reconsider your path", next: "appa_pressure", statChanges: { fear: 1 } }
+    ]
+  },
+
+  appa_pressure: {
+    text: "research was isolating at times.",
+    rightImage: "images/appa_sad.png",
+    statChanges: { fear: 1 },
+    choices: [
+      { text: "push forward", next: "appa_growth", statChanges: { ambition: 1 } },
+      { text: "lean on community", next: "appa_growth", statChanges: { culture: 1 } }
+    ]
+  },
+
+  appa_growth: {
+    text: "you became more certain in what you wanted to do, but would you continue to vie for your PhD or pursue a different path?",
+    rightImage: "images/appa_happy.png",
+    choices: [
+      { text: "take a leap of faith", next: "appa_pre_meeting", statChanges: { risk: 2 } },
+      { text: "play it safe", next: "appa_pre_meeting", statChanges: { fear: 1 } }
+    ]
+  },
+
+  appa_pre_meeting: {
+    text: "your path had shaped you into someone ready.",
+    rightImage: "images/appa_neutral.png",
     choices: [{ text: "continue", next: "meeting_scene" }]
   },
+
+  // meeting
 
   meeting_scene: {
     dynamic: true,
@@ -213,8 +306,8 @@ const scenes = {
     music: "sounds/meeting.mp3",
     choices: [{ text: "restart", next: "start" }]
   }
-};
 
+};
 // scene loader
 
 function loadScene(sceneName) {
