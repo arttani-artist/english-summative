@@ -372,21 +372,24 @@ const rightImg = document.getElementById("right-image");
 
   updateStatDisplay();
 
-    let choicesDiv = document.getElementById("choices");
-    choicesDiv.innerHTML = "";
+  let choicesDiv = document.getElementById("choices");
+  choicesDiv.innerHTML = "";
 
-    scene.choices.forEach(choice => {
-      let button = document.createElement("button");
-      button.innerText = choice.text;
+  scene.choices.forEach(choice => {
+    let button = document.createElement("button");
+    button.innerText = choice.text;
 
-        if (choice.setPlayer) currentPlayer = choice.setPlayer;
+    button.onclick = () => {
+      document.getElementById("click-sound").play();
 
-        loadScene(choice.next);
-        saveGame();
-      };
+      if (choice.setPlayer) currentPlayer = choice.setPlayer;
 
-      choicesDiv.appendChild(button);
-    });
+      loadScene(choice.next);
+      saveGame();
+    };
+
+    choicesDiv.appendChild(button);
+  });
 
     game.classList.remove("fade-out");
 
