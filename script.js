@@ -71,7 +71,7 @@ function updateIdentityBar() {
 
   if (diff > 1) bar.style.background = "maroon";
   else if (diff < -1) bar.style.background = "navy";
-  else bar.style.background = "purple";
+  else bar.style.background = "#6b4f3a";
 }
 
 // typewriter
