@@ -2,32 +2,51 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>netra's english summative</title>
+  <title>two journeys</title>
+
+  <!-- indie pixel font -->
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div id="scene-background"></div>
+<div id="color-overlay"></div>
 
 <div id="ui">
 
-  <div id="top-bar">
-    <div id="identity-meter">
-      <div id="identity-fill"></div>
-      <div id="identity-label-left">culture</div>
-      <div id="identity-label-right">assimilation</div>
-    </div>
-    <div id="timeline"></div>
-  </div>
+  <div id="timeline"></div>
 
   <div id="game">
+
     <div id="character-layer">
-      <img id="left-image" src="">
-      <img id="right-image" src="">
+      <img id="left-image">
+      <img id="right-image">
     </div>
 
     <div id="text-box"></div>
     <div id="choices"></div>
+
+  </div>
+
+  <!-- bottom stat panel -->
+  <div id="stat-panel">
+
+    <div class="stat-group">
+      <div class="stat-title">AMMA</div>
+      <div class="stat-line">Ambition: <span id="amma-ambition">0</span></div>
+      <div class="stat-line">Culture: <span id="amma-culture">0</span></div>
+      <div class="stat-line">Assimilation: <span id="amma-assimilation">0</span></div>
+    </div>
+
+    <div class="stat-group">
+      <div class="stat-title">APPA</div>
+      <div class="stat-line">Ambition: <span id="appa-ambition">0</span></div>
+      <div class="stat-line">Culture: <span id="appa-culture">0</span></div>
+      <div class="stat-line">Assimilation: <span id="appa-assimilation">0</span></div>
+    </div>
+
   </div>
 
 </div>
