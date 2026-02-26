@@ -9,6 +9,7 @@ body {
 #game {
   min-height: 100vh;
   position: relative;
+  filter: sepia(0.6) contrast(0.9) brightness(0.95);
 }
 
 /* Background */
