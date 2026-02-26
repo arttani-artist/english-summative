@@ -379,9 +379,6 @@ const rightImg = document.getElementById("right-image");
       let button = document.createElement("button");
       button.innerText = choice.text;
 
-      button.onclick = () => {
-        document.getElementById("click-sound").play();
-
         if (choice.setPlayer) currentPlayer = choice.setPlayer;
 
         loadScene(choice.next);
