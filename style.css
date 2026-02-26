@@ -1,9 +1,14 @@
 body {
-  margin: 0;
   background: #050505;
   color: #eaeaea;
+  margin: 0;
   font-family: 'VT323', monospace;
-  overflow: hidden;
+  overflow-y: auto;
+}
+
+#game {
+  min-height: 100vh;
+  position: relative;
 }
 
 /* Background */
