@@ -83,7 +83,7 @@ body::after {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  background-image: url("images/grain.png");
+  background-image: url("images/grain.jpg");
   opacity: 0.05;
 }
 
