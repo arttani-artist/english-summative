@@ -6,6 +6,15 @@ let currentScene = "start";
 let ammaStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
 let appaStats = { ambition: 0, fear: 0, culture: 0, assimilation: 0, risk: 0 };
 
+function updateStatDisplay() {
+  document.getElementById("amma-ambition").innerText = ammaStats.ambition;
+  document.getElementById("amma-culture").innerText = ammaStats.culture;
+  document.getElementById("amma-assimilation").innerText = ammaStats.assimilation;
+
+  document.getElementById("appa-ambition").innerText = appaStats.ambition;
+  document.getElementById("appa-culture").innerText = appaStats.culture;
+  document.getElementById("appa-assimilation").innerText = appaStats.assimilation;
+}
 // music
 
 let currentMusic = null;
@@ -352,13 +361,16 @@ const rightImg = document.getElementById("right-image");
 
     typeWriter(text);
 
-    if (scene.statChanges) {
-      let stats = currentPlayer === "amma" ? ammaStats : appaStats;
-      for (let key in scene.statChanges) {
+  if (scene.statChanges) {
+    let stats = currentPlayer === "amma" ? ammaStats : appaStats;
+    for (let key in scene.statChanges) {
+      if (stats[key] !== undefined) {
         stats[key] += scene.statChanges[key];
       }
-      updateIdentityBar();
     }
+  }
+
+  updateStatDisplay();
 
     let choicesDiv = document.getElementById("choices");
     choicesDiv.innerHTML = "";
@@ -388,4 +400,4 @@ const rightImg = document.getElementById("right-image");
 
 loadGame();
 loadScene(currentScene);
-updateIdentityBar();
+updateStatDisplay();
